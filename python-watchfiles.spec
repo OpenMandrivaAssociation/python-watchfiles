@@ -27,6 +27,8 @@ BuildRequires:	rust-packaging
 
 Requires:	python%{pyver}dist(anyio)
 
+Obsoletes:	python-watchgod < %{version}
+
 %description
 Simple, modern and high performance file watching and code reload in python.
 
