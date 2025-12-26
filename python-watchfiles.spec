@@ -7,7 +7,7 @@
 
 Name:		python-watchfiles
 Version:	1.1.1
-Release:	1
+Release:	2
 Summary:	Simple, modern and high performance file watching and code reload in python
 URL:		https://pypi.org/project/watchfiles/
 License:	MIT
@@ -27,7 +27,7 @@ BuildRequires:	rust-packaging
 
 Requires:	python%{pyver}dist(anyio)
 
-Obsoletes:	python-watchgod < %{version}
+%rename python-watchgod
 
 %description
 Simple, modern and high performance file watching and code reload in python.
