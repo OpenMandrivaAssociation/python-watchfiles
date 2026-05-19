@@ -6,17 +6,16 @@
 # NOTE	Source1 & yml.
 
 Name:		python-watchfiles
-Version:	1.1.1
-Release:	2
+Version:	1.2.0
+Release:	1
 Summary:	Simple, modern and high performance file watching and code reload in python
 URL:		https://pypi.org/project/watchfiles/
 License:	MIT
 Group:		Development/Python
 Source0:	https://files.pythonhosted.org/packages/source/w/%{module}/%{module}-%{version}.tar.gz
-Source1:	%{module}-%{version}-vendor.tar.xz
+Source1:	%{name}-%{version}-vendor.tar.xz
 
 BuildSystem:	python
-
 BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(python)
 BuildRequires:	python%{pyver}dist(anyio)
@@ -24,7 +23,6 @@ BuildRequires:	python%{pyver}dist(maturin)
 BuildRequires:	python%{pyver}dist(wheel)
 BuildRequires:	cargo
 BuildRequires:	rust-packaging
-
 Requires:	python%{pyver}dist(anyio)
 
 %rename python-watchgod
@@ -45,15 +43,14 @@ directory = "vendor"
 
 EOF
 
-%build
+%build -p
+export CARGO_HOME=$PWD/.cargo
 export CLFAGS="%{optflags}"
 export LDFLAGS="%{ldflags} -lpython%{py_ver}"
-%py_build
+
+%build -a
 %cargo_license_summary
 %{cargo_license} > LICENSES.dependencies
-
-%install
-%py_install
 
 %files
 %{_bindir}/%{module}
